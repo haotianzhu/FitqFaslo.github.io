@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0;url=https://www.pmebusiness.com/ca/shop/fitline-products/fitline-products/basic-supply/fitline-optimal-set/?TP=20868034&lang=en&region=15#autoship" />
-    <title>跳转中...</title>
+    <meta charset="UTF-8">
+    <title>正在为您跳转...</title>
+    <script>
+      const countryRedirectMap = {
+        "CA": "https://www.pmebusiness.com/ca/shop/fitline-products/fitline-products/basic-supply/fitline-optimal-set/?TP=20868034&lang=en&region=15#autoship",
+        "US": "https://www.pmebusiness.com/us/shop/fitline/fitline-products/optimized-supply/optimal-set-pr/?TP=20868034&lang=en#autoship",
+        "DE": "https://www.pmebusiness.com/de/shop/fitline/fitline-produkte/optimalversorgung/optimal-set-powercocktail-restorate-citrus/?TP=20868034&lang=de#autoship"
+      };
+
+      const defaultURL = "https://www.pmebusiness.com/us/shop/fitline/fitline-products/optimized-supply/optimal-set-pr/?TP=20868034&lang=en#autoship"; // 默认跳转地址（找不到国家时）
+
+      fetch("https://ipapi.co/json/")
+        .then(response => response.json())
+        .then(data => {
+          const countryCode = data.country_code;
+          console.log("获取 IP 信息", countryCode);
+          const redirectUrl = countryRedirectMap[countryCode] || defaultURL;
+          window.location.href = redirectUrl;
+        })
+        .catch(error => {
+          console.error("无法获取 IP 信息，跳转默认地址", error);
+          window.location.href = defaultURL;
+        });
+    </script>
   </head>
   <body>
-    如果没有自动跳转，请点击 <a href="https://www.pmebusiness.com/ca/shop/fitline-products/fitline-products/basic-supply/fitline-optimal-set/?TP=20868034&lang=en&region=15#autoship">这里</a>。
+    <p>根据您的地区正在跳转，请稍候...</p>
   </body>
 </html>
